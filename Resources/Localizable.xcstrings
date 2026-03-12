@@ -1,0 +1,1028 @@
+{
+  "sourceLanguage" : "ru",
+  "strings" : {
+    "tab_dashboard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Главная"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Басты бет"
+          }
+        }
+      }
+    },
+    "tab_history" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "История"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тарих"
+          }
+        }
+      }
+    },
+    "tab_add" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Қосу"
+          }
+        }
+      }
+    },
+    "tab_import" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Импорт"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Импорт"
+          }
+        }
+      }
+    },
+    "tab_settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баптаулар"
+          }
+        }
+      }
+    },
+    "category_food" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продукты"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Food"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Азық-түлік"
+          }
+        }
+      }
+    },
+    "category_transport" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Транспорт"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transport"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Көлік"
+          }
+        }
+      }
+    },
+    "category_housing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жильё"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Housing"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тұрғын үй"
+          }
+        }
+      }
+    },
+    "category_utilities" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Коммунальные"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilities"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Коммуналдық"
+          }
+        }
+      }
+    },
+    "category_entertainment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Развлечения"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entertainment"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ойын-сауық"
+          }
+        }
+      }
+    },
+    "category_health" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Здоровье"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Денсаулық"
+          }
+        }
+      }
+    },
+    "category_clothing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Одежда"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clothing"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Киім"
+          }
+        }
+      }
+    },
+    "category_education" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Образование"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Education"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Білім"
+          }
+        }
+      }
+    },
+    "category_subscriptions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подписки"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscriptions"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жазылымдар"
+          }
+        }
+      }
+    },
+    "category_transfers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Переводы"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transfers"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аударымдар"
+          }
+        }
+      }
+    },
+    "category_income" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доход"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Income"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кіріс"
+          }
+        }
+      }
+    },
+    "category_other" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Другое"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Басқа"
+          }
+        }
+      }
+    },
+    "amount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сумма"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amount"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сома"
+          }
+        }
+      }
+    },
+    "date" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дата"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Күні"
+          }
+        }
+      }
+    },
+    "save" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранить"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сақтау"
+          }
+        }
+      }
+    },
+    "cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бас тарту"
+          }
+        }
+      }
+    },
+    "total_expenses" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Общие расходы"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Expenses"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жалпы шығындар"
+          }
+        }
+      }
+    },
+    "total_income" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Общий доход"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Income"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жалпы кіріс"
+          }
+        }
+      }
+    },
+    "no_transactions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет транзакций"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No transactions"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Транзакциялар жоқ"
+          }
+        }
+      }
+    },
+    "import_pdf" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Импорт из PDF"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import from PDF"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF-тен импорт"
+          }
+        }
+      }
+    },
+    "select_category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите категорию"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select category"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Санатты таңдаңыз"
+          }
+        }
+      }
+    },
+    "note" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заметка"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Note"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жазба"
+          }
+        }
+      }
+    },
+    "balance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баланс"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balance"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Баланс"
+          }
+        }
+      }
+    },
+    "expenses_by_category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Расходы по категориям"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expenses by category"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Санат бойынша шығындар"
+          }
+        }
+      }
+    },
+    "total" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Итого"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Барлығы"
+          }
+        }
+      }
+    },
+    "today" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сегодня"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Бүгін"
+          }
+        }
+      }
+    },
+    "yesterday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вчера"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yesterday"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кеше"
+          }
+        }
+      }
+    },
+    "delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жою"
+          }
+        }
+      }
+    },
+    "no_transactions_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавьте транзакцию или импортируйте выписку"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a transaction or import a statement"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Транзакция қосыңыз немесе үзінді көшірмені импорттаңыз"
+          }
+        }
+      }
+    },
+    "done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Готово" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Done" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Дайын" } }
+      }
+    },
+    "transaction_type" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Тип операции" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Transaction type" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Операция түрі" } }
+      }
+    },
+    "expense" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Расход" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Expense" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Шығыс" } }
+      }
+    },
+    "income_type" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Доход" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Income" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Кіріс" } }
+      }
+    },
+    "transaction_saved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Транзакция сохранена" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Transaction saved" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Транзакция сақталды" } }
+      }
+    },
+    "import_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выберите PDF-выписку из Kaspi или Halyk для автоматического импорта транзакций" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select a PDF statement from Kaspi or Halyk to automatically import transactions" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Транзакцияларды автоматты импорттау үшін Kaspi немесе Halyk PDF үзінді көшірмесін таңдаңыз" } }
+      }
+    },
+    "select_pdf" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выбрать PDF" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select PDF" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "PDF таңдау" } }
+      }
+    },
+    "error_pdf_read" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Не удалось прочитать PDF файл" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Failed to read PDF file" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "PDF файлды оқу мүмкін болмады" } }
+      }
+    },
+    "parsed_transactions %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Найдено транзакций: %lld" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld transactions found" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "%lld транзакция табылды" } }
+      }
+    },
+    "duplicates_skipped %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Дубликатов пропущено: %lld" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld duplicates skipped" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "%lld көшірме өткізілді" } }
+      }
+    },
+    "review_transactions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Проверьте транзакции" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Review transactions" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Транзакцияларды тексеріңіз" } }
+      }
+    },
+    "save_transactions %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Сохранить %lld транзакций" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Save %lld transactions" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "%lld транзакцияны сақтау" } }
+      }
+    },
+    "import_success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Импорт завершён" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Import complete" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Импорт аяқталды" } }
+      }
+    },
+    "subscriptions_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Подписки" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Subscriptions" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жазылымдар" } }
+      }
+    },
+    "monthly_total" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Ежемесячно" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Monthly total" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Ай сайын" } }
+      }
+    },
+    "active_subscriptions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Активные подписки" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Active subscriptions" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Белсенді жазылымдар" } }
+      }
+    },
+    "no_subscriptions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нет подписок" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No subscriptions" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жазылымдар жоқ" } }
+      }
+    },
+    "no_subscriptions_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Подписки автоматически определяются при импорте выписки" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Subscriptions are automatically detected when importing a statement" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жазылымдар үзінді көшірмені импорттағанда автоматты анықталады" } }
+      }
+    },
+    "times %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "%lld раз" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld times" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "%lld рет" } }
+      }
+    },
+    "appearance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Оформление" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Appearance" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Сыртқы түрі" } }
+      }
+    },
+    "system_appearance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Системная тема" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System appearance" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жүйелік тема" } }
+      }
+    },
+    "appearance_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Тёмная и светлая тема переключается в Настройках iOS" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dark and light mode follows iOS system settings" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Қараңғы және жарық тема iOS баптауларында ауысады" } }
+      }
+    },
+    "data_and_backup" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Данные" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Data & Backup" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Деректер" } }
+      }
+    },
+    "erase_all_data" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Удалить все данные" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Erase all data" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Барлық деректерді жою" } }
+      }
+    },
+    "erase_all_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Удалить все данные?" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Erase all data?" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Барлық деректерді жою?" } }
+      }
+    },
+    "erase_all_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Все транзакции будут безвозвратно удалены. Это действие нельзя отменить." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All transactions will be permanently deleted. This cannot be undone." } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Барлық транзакциялар біржола жойылады. Бұл әрекетті кері қайтару мүмкін емес." } }
+      }
+    },
+    "erase_all_confirm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Удалить всё" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Erase everything" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Барлығын жою" } }
+      }
+    },
+    "data_erased" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Данные удалены" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Data erased" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Деректер жойылды" } }
+      }
+    },
+    "about" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "О приложении" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "About" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Қолданба туралы" } }
+      }
+    },
+    "app_version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Версия" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Version" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Нұсқа" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}
