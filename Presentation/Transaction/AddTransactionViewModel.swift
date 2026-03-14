@@ -9,10 +9,16 @@ final class AddTransactionViewModel {
 
     var amountText: String = ""
     var date: Date = .now
-    var category: Category = .food
+    var selectedCategory: CategoryItem = .system(.food)
+    var selectedSubcategory: SubcategoryItem?
     var note: String = ""
     var isIncome: Bool = false
     var isSubscription: Bool = false
+
+    // MARK: - Taxonomy
+
+    /// All available categories (system + custom), set on init.
+    let allCategories: [CategoryItem]
 
     // MARK: - UI State
 
@@ -33,17 +39,51 @@ final class AddTransactionViewModel {
         parsedAmount > 0 && !isSaving
     }
 
+    /// Categories for the grid (exclude income/transfers for system categories).
+    var expenseCategories: [CategoryItem] {
+        allCategories.filter { item in
+            switch item {
+            case .system(let cat):
+                cat != .income && cat != .transfers
+            case .custom:
+                true
+            }
+        }
+    }
+
     // MARK: - Dependencies
 
     private let addTransactionUseCase: AddTransactionUseCase
 
     // MARK: - Init
 
-    init(addTransactionUseCase: AddTransactionUseCase) {
+    init(
+        addTransactionUseCase: AddTransactionUseCase,
+        customCategories: [CustomCategorySnapshot] = []
+    ) {
         self.addTransactionUseCase = addTransactionUseCase
+
+        var items: [CategoryItem] = Category.allCases.map { .system($0) }
+        items.append(contentsOf: customCategories.map { .custom($0) })
+        self.allCategories = items
     }
 
     // MARK: - Actions
+
+    func selectCategory(_ item: CategoryItem) {
+        if selectedCategory != item {
+            selectedCategory = item
+            selectedSubcategory = nil
+        }
+    }
+
+    func toggleSubcategory(_ item: SubcategoryItem) {
+        if selectedSubcategory == item {
+            selectedSubcategory = nil
+        } else {
+            selectedSubcategory = item
+        }
+    }
 
     func save() {
         guard canSave else { return }
@@ -55,7 +95,8 @@ final class AddTransactionViewModel {
             try addTransactionUseCase.execute(
                 amount: parsedAmount,
                 date: date,
-                category: category,
+                categoryKey: selectedCategory.storageKey,
+                subcategoryKey: selectedSubcategory?.storageKey ?? "",
                 note: note,
                 isSubscription: isSubscription,
                 isIncome: isIncome
@@ -72,7 +113,8 @@ final class AddTransactionViewModel {
     private func resetForm() {
         amountText = ""
         date = .now
-        category = .food
+        selectedCategory = .system(.food)
+        selectedSubcategory = nil
         note = ""
         isIncome = false
         isSubscription = false

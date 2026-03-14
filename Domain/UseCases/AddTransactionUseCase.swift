@@ -13,8 +13,8 @@ final class AddTransactionUseCase {
     func execute(
         amount: Double,
         date: Date,
-        category: Category,
-        subcategory: String = "",
+        categoryKey: String,
+        subcategoryKey: String = "",
         note: String = "",
         isSubscription: Bool = false,
         isIncome: Bool = false
@@ -22,8 +22,8 @@ final class AddTransactionUseCase {
         let transaction = Transaction(
             amount: amount,
             date: date,
-            category: category.rawValue,
-            subcategory: subcategory,
+            category: categoryKey,
+            subcategory: subcategoryKey,
             note: note,
             isSubscription: isSubscription,
             isIncome: isIncome

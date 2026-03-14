@@ -4,20 +4,21 @@ import Foundation
 struct TransactionFilter: Sendable {
     var startDate: Date?
     var endDate: Date?
-    var category: Category?
+    /// Raw category string (enum rawValue or "custom:<UUID>").
+    var categoryRaw: String?
     var isIncome: Bool?
     var isSubscription: Bool?
 
     init(
         startDate: Date? = nil,
         endDate: Date? = nil,
-        category: Category? = nil,
+        categoryRaw: String? = nil,
         isIncome: Bool? = nil,
         isSubscription: Bool? = nil
     ) {
         self.startDate = startDate
         self.endDate = endDate
-        self.category = category
+        self.categoryRaw = categoryRaw
         self.isIncome = isIncome
         self.isSubscription = isSubscription
     }
@@ -37,6 +38,9 @@ protocol TransactionRepositoryProtocol {
 
     /// Add multiple transactions in a batch (e.g. from PDF import).
     func addBatch(_ transactions: [Transaction]) throws
+
+    /// Persist in-memory changes to an existing transaction.
+    func update(_ transaction: Transaction) throws
 
     /// Delete a transaction by reference.
     func delete(_ transaction: Transaction) throws

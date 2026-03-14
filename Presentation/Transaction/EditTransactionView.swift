@@ -1,51 +1,73 @@
 import SwiftUI
 
-struct AddTransactionView: View {
+struct EditTransactionView: View {
 
-    @State private var viewModel: AddTransactionViewModel
-    @State private var showSavedToast = false
+    @State private var viewModel: EditTransactionViewModel
+    @Environment(\.dismiss) private var dismiss
 
-    init(viewModel: AddTransactionViewModel) {
+    init(viewModel: EditTransactionViewModel) {
         _viewModel = State(wrappedValue: viewModel)
     }
 
     var body: some View {
-        NavigationStack {
-            Form {
-                amountSection
-                typeToggle
-                categorySection
-                detailsSection
-            }
-            .navigationTitle(String(localized: "tab_add"))
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button(String(localized: "done")) {
-                        UIApplication.shared.sendAction(
-                            #selector(UIResponder.resignFirstResponder),
-                            to: nil, from: nil, for: nil
-                        )
-                    }
+        Form {
+            amountSection
+            typeToggle
+            categorySection
+            detailsSection
+            deleteSection
+        }
+        .navigationTitle(String(localized: "edit_transaction_title"))
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(String(localized: "cancel")) {
+                    dismiss()
                 }
             }
-            .safeAreaInset(edge: .bottom) {
-                saveButton
-            }
-            .overlay {
-                if showSavedToast {
-                    savedToast
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button(String(localized: "done")) {
+                    UIApplication.shared.sendAction(
+                        #selector(UIResponder.resignFirstResponder),
+                        to: nil, from: nil, for: nil
+                    )
                 }
             }
-            .onChange(of: viewModel.didSave) { _, saved in
-                if saved {
-                    showSavedToast = true
-                    viewModel.didSave = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        showSavedToast = false
-                    }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(String(localized: "save")) {
+                    viewModel.save()
                 }
+                .fontWeight(.semibold)
+                .disabled(!viewModel.canSave || !viewModel.hasChanges)
             }
+        }
+        .alert(
+            String(localized: "error"),
+            isPresented: .init(
+                get: { viewModel.errorMessage != nil },
+                set: { if !$0 { viewModel.errorMessage = nil } }
+            )
+        ) {
+            Button(String(localized: "ok")) { }
+        } message: {
+            Text(viewModel.errorMessage ?? "")
+        }
+        .confirmationDialog(
+            String(localized: "delete_transaction_confirm"),
+            isPresented: $viewModel.showDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button(String(localized: "delete"), role: .destructive) {
+                viewModel.deleteTransaction()
+            }
+            Button(String(localized: "cancel"), role: .cancel) { }
+        }
+        .onChange(of: viewModel.didSave) { _, saved in
+            if saved { dismiss() }
+        }
+        .onChange(of: viewModel.didDelete) { _, deleted in
+            if deleted { dismiss() }
         }
     }
 
@@ -149,51 +171,23 @@ struct AddTransactionView: View {
         }
     }
 
-    // MARK: - Save Button
+    // MARK: - Delete
 
-    private var saveButton: some View {
-        Button {
-            viewModel.save()
-        } label: {
-            Group {
-                if viewModel.isSaving {
-                    ProgressView()
-                } else {
-                    Text(saveButtonTitle)
+    private var deleteSection: some View {
+        Section {
+            Button(role: .destructive) {
+                viewModel.confirmDelete()
+            } label: {
+                HStack {
+                    Spacer()
+                    if viewModel.isDeleting {
+                        ProgressView()
+                    } else {
+                        Label(String(localized: "delete_transaction"), systemImage: "trash")
+                    }
+                    Spacer()
                 }
             }
-            .font(.headline)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 14)
         }
-        .buttonStyle(.borderedProminent)
-        .disabled(!viewModel.canSave)
-        .padding(.horizontal)
-        .padding(.bottom, 8)
-    }
-
-    private var saveButtonTitle: String {
-        if viewModel.parsedAmount > 0 {
-            let formatted = CurrencyFormatter.format(viewModel.parsedAmount)
-            return String(localized: "save") + " \(formatted)"
-        }
-        return String(localized: "save")
-    }
-
-    // MARK: - Toast
-
-    private var savedToast: some View {
-        VStack {
-            Spacer()
-            Label(String(localized: "transaction_saved"), systemImage: "checkmark.circle.fill")
-                .font(.subheadline.weight(.medium))
-                .padding(.horizontal, 20)
-                .padding(.vertical, 12)
-                .background(.ultraThinMaterial)
-                .clipShape(Capsule())
-                .padding(.bottom, 100)
-        }
-        .transition(.move(edge: .bottom).combined(with: .opacity))
-        .animation(.spring(duration: 0.3), value: showSavedToast)
     }
 }

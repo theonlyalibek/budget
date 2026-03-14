@@ -65,9 +65,9 @@ final class GetDashboardStatsUseCaseTests: XCTestCase {
             makeTransaction(amount: 12_000, category: .transport, isIncome: false)
         ]
         let stats = try useCase.execute(startDate: .distantPast, endDate: .distantFuture)
-        XCTAssertEqual(stats.expensesByCategory[.food], 8_000, accuracy: 0.01,
+        XCTAssertEqual(stats.expensesByCategory["food"], 8_000, accuracy: 0.01,
             "Two food expenses must be combined into one bucket")
-        XCTAssertEqual(stats.expensesByCategory[.transport], 12_000, accuracy: 0.01)
+        XCTAssertEqual(stats.expensesByCategory["transport"], 12_000, accuracy: 0.01)
     }
 
     func test_unknownCategoryRawValue_fallsBackToOther() throws {
@@ -76,8 +76,8 @@ final class GetDashboardStatsUseCaseTests: XCTestCase {
                             isIncome: false)
         repository.stored = [t]
         let stats = try useCase.execute(startDate: .distantPast, endDate: .distantFuture)
-        XCTAssertEqual(stats.expensesByCategory[.other], 2_000, accuracy: 0.01,
-            "Unrecognised category must fall back to .other")
+        XCTAssertEqual(stats.expensesByCategory["garbage_value"], 2_000, accuracy: 0.01,
+            "Unknown category keys are stored as-is in expensesByCategory")
     }
 
     // MARK: - Mixed income and expenses

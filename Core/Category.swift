@@ -54,4 +54,41 @@ enum Category: String, CaseIterable, Identifiable {
         case .other: .secondary
         }
     }
+
+    /// Predefined subcategories for hierarchical taxonomy.
+    /// Each subcategory key maps to a localized string "subcategory_\(key)".
+    var subcategories: [String] {
+        switch self {
+        case .food:
+            ["groceries", "restaurants", "cafes", "delivery", "fast_food"]
+        case .transport:
+            ["taxi", "bus", "fuel", "parking", "metro"]
+        case .housing:
+            ["rent", "mortgage", "repairs", "furniture"]
+        case .utilities:
+            ["electricity", "water", "internet", "phone", "heating"]
+        case .entertainment:
+            ["cinema", "concerts", "games", "sports", "hobbies"]
+        case .health:
+            ["pharmacy", "doctor", "gym", "insurance"]
+        case .clothing:
+            ["clothes", "shoes", "accessories"]
+        case .education:
+            ["courses", "books", "tuition"]
+        case .subscriptions:
+            ["streaming", "apps", "services"]
+        case .transfers:
+            ["to_person", "to_card", "to_account"]
+        case .income:
+            ["salary", "freelance", "gift", "cashback"]
+        case .other:
+            []
+        }
+    }
+
+    /// Localized name for a subcategory key.
+    static func localizedSubcategory(_ key: String) -> String {
+        guard !key.isEmpty else { return "" }
+        return String(localized: String.LocalizationValue("subcategory_\(key)"))
+    }
 }

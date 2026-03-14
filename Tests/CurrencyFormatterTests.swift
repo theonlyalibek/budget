@@ -67,4 +67,26 @@ final class CurrencyFormatterTests: XCTestCase {
     func test_formatter_currencySymbol_isTenge() {
         XCTAssertEqual(CurrencyFormatter.tenge.currencySymbol, "₸")
     }
+
+    // MARK: - formatRaw
+
+    func test_formatRaw_wholeNumber_returnsIntegerString() {
+        XCTAssertEqual(CurrencyFormatter.formatRaw(5000), "5000")
+    }
+
+    func test_formatRaw_fractionalNumber_returnsDecimalString() {
+        let result = CurrencyFormatter.formatRaw(1500.75)
+        XCTAssertTrue(result.contains("1500.75"),
+            "Fractional amount must include decimal, got: \(result)")
+    }
+
+    func test_formatRaw_zero_returnsZero() {
+        XCTAssertEqual(CurrencyFormatter.formatRaw(0), "0")
+    }
+
+    func test_formatRaw_noCurrencySymbol() {
+        let result = CurrencyFormatter.formatRaw(10_000)
+        XCTAssertFalse(result.contains("₸"),
+            "formatRaw must not contain ₸ symbol, got: \(result)")
+    }
 }

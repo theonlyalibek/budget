@@ -7,7 +7,7 @@ final class CategoryDetailViewModel {
 
     // MARK: - State
 
-    let category: Category
+    let categoryItem: CategoryItem
     private(set) var transactions: [Transaction] = []
     private(set) var isLoading = false
 
@@ -21,8 +21,15 @@ final class CategoryDetailViewModel {
 
     // MARK: - Init
 
-    init(category: Category, repository: TransactionRepositoryProtocol) {
-        self.category = category
+    init(
+        categoryKey: String,
+        customCategories: [CustomCategorySnapshot],
+        repository: TransactionRepositoryProtocol
+    ) {
+        self.categoryItem = CategoryItem.from(
+            storedValue: categoryKey,
+            customCategories: customCategories
+        )
         self.repository = repository
     }
 
@@ -31,7 +38,10 @@ final class CategoryDetailViewModel {
     func load() {
         isLoading = true
         do {
-            let filter = TransactionFilter(category: category, isIncome: false)
+            let filter = TransactionFilter(
+                categoryRaw: categoryItem.storageKey,
+                isIncome: false
+            )
             transactions = try repository.fetch(filter: filter)
                 .sorted { $0.date > $1.date }
         } catch {

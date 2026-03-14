@@ -4,7 +4,8 @@ import Foundation
 struct DashboardStats: Sendable {
     let totalIncome: Double
     let totalExpenses: Double
-    let expensesByCategory: [Category: Double]
+    /// Keyed by category storage string (enum rawValue or "custom:<UUID>").
+    let expensesByCategory: [String: Double]
 
     var balance: Double {
         totalIncome - totalExpenses

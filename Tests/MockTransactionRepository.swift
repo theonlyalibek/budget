@@ -20,14 +20,17 @@ final class MockTransactionRepository: TransactionRepositoryProtocol {
     private(set) var stored: [Transaction] = []
     private(set) var addCallCount = 0
     private(set) var addBatchCallCount = 0
+    private(set) var updateCallCount = 0
     private(set) var deleteCallCount = 0
     private(set) var deleteAllCallCount = 0
     private(set) var lastAddedTransaction: Transaction?
+    private(set) var lastUpdatedTransaction: Transaction?
 
     // MARK: - Test controls
 
     var shouldThrowOnFetch = false
     var shouldThrowOnAdd = false
+    var shouldThrowOnUpdate = false
 
     // MARK: - Protocol
 
@@ -43,6 +46,14 @@ final class MockTransactionRepository: TransactionRepositoryProtocol {
         addCallCount += 1
         lastAddedTransaction = transaction
         stored.append(transaction)
+    }
+
+    func update(_ transaction: Transaction) throws {
+        if shouldThrowOnUpdate { throw TestError.intentional }
+        updateCallCount += 1
+        lastUpdatedTransaction = transaction
+        // In-memory: the transaction object is already mutated by the caller,
+        // so stored array reflects changes automatically (reference type).
     }
 
     func addBatch(_ transactions: [Transaction]) throws {
@@ -74,7 +85,7 @@ final class MockTransactionRepository: TransactionRepositoryProtocol {
     private func matches(_ t: Transaction, filter: TransactionFilter) -> Bool {
         if let start = filter.startDate, t.date < start { return false }
         if let end   = filter.endDate,   t.date > end   { return false }
-        if let cat   = filter.category,  t.category != cat.rawValue { return false }
+        if let cat   = filter.categoryRaw, t.category != cat { return false }
         if let inc   = filter.isIncome,  t.isIncome  != inc  { return false }
         if let sub   = filter.isSubscription, t.isSubscription != sub { return false }
         return true

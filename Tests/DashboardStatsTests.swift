@@ -36,16 +36,16 @@ final class DashboardStatsTests: XCTestCase {
     // MARK: - expensesByCategory integrity
 
     func test_expensesByCategory_valuesArePreserved() {
-        let breakdown: [Category: Double] = [.food: 30_000, .transport: 15_000]
+        let breakdown: [String: Double] = ["food": 30_000, "transport": 15_000]
         let stats = DashboardStats(totalIncome: 0, totalExpenses: 45_000,
                                    expensesByCategory: breakdown)
-        XCTAssertEqual(stats.expensesByCategory[.food], 30_000)
-        XCTAssertEqual(stats.expensesByCategory[.transport], 15_000)
+        XCTAssertEqual(stats.expensesByCategory["food"], 30_000)
+        XCTAssertEqual(stats.expensesByCategory["transport"], 15_000)
     }
 
     func test_expensesByCategory_missingCategory_returnsNil() {
         let stats = DashboardStats(totalIncome: 0, totalExpenses: 0,
                                    expensesByCategory: [:])
-        XCTAssertNil(stats.expensesByCategory[.entertainment])
+        XCTAssertNil(stats.expensesByCategory["entertainment"])
     }
 }

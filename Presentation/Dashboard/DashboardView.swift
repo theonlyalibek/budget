@@ -9,8 +9,11 @@ struct DashboardView: View {
     @Environment(LocalSubscriptionService.self) private var subscriptionService
     @EnvironmentObject private var container: DIContainer
 
-    init(viewModel: DashboardViewModel) {
+    private let customCategoriesBinding: [CustomCategorySnapshot]
+
+    init(viewModel: DashboardViewModel, customCategories: [CustomCategorySnapshot] = []) {
         _viewModel = State(wrappedValue: viewModel)
+        self.customCategoriesBinding = customCategories
     }
 
     var body: some View {
@@ -26,7 +29,10 @@ struct DashboardView: View {
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle(String(localized: "tab_dashboard"))
-            .onAppear { viewModel.loadStats() }
+            .onAppear {
+                viewModel.customCategories = customCategoriesBinding
+                viewModel.loadStats()
+            }
             .refreshable { viewModel.loadStats() }
             .overlay {
                 if viewModel.isLoading { ProgressView() }
@@ -37,9 +43,10 @@ struct DashboardView: View {
             .sheet(isPresented: $showPaywall) {
                 PaywallView(feature: .aiCoach)
             }
-            .navigationDestination(for: Category.self) { category in
+            .navigationDestination(for: String.self) { categoryKey in
                 CategoryDetailView(
-                    category: category,
+                    categoryKey: categoryKey,
+                    customCategories: viewModel.customCategories,
                     repository: container.transactionRepository
                 )
             }
@@ -50,7 +57,6 @@ struct DashboardView: View {
 
     private var balanceCards: some View {
         VStack(spacing: 12) {
-            // Balance — large hero card
             VStack(alignment: .leading, spacing: 6) {
                 Text(String(localized: "balance"))
                     .font(.subheadline)
@@ -107,7 +113,6 @@ struct DashboardView: View {
 
     @ViewBuilder
     private var insightCard: some View {
-        // Static placeholder — real AI integration in Step 4
         if viewModel.stats.totalExpenses > 0 {
             InsightCard(
                 title: String(localized: "insight_title"),
@@ -133,13 +138,13 @@ struct DashboardView: View {
                 Text(String(localized: "expenses_by_category"))
                     .font(.headline)
 
-                Chart(expenses, id: \.category) { item in
+                Chart(expenses, id: \.categoryItem) { item in
                     SectorMark(
                         angle: .value("amount", item.amount),
                         innerRadius: .ratio(0.6),
                         angularInset: 1.5
                     )
-                    .foregroundStyle(item.category.color)
+                    .foregroundStyle(item.categoryItem.color)
                     .cornerRadius(4)
                 }
                 .frame(height: 220)
@@ -166,10 +171,10 @@ struct DashboardView: View {
         let expenses = viewModel.sortedExpenses
         if !expenses.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                ForEach(expenses, id: \.category) { item in
-                    NavigationLink(value: item.category) {
+                ForEach(expenses, id: \.categoryItem) { item in
+                    NavigationLink(value: item.categoryItem.storageKey) {
                         dashboardCategoryRow(
-                            category: item.category,
+                            item: item.categoryItem,
                             amount: item.amount,
                             total: viewModel.stats.totalExpenses
                         )
@@ -190,25 +195,25 @@ struct DashboardView: View {
     }
 
     private func dashboardCategoryRow(
-        category: Category, amount: Double, total: Double
+        item: CategoryItem, amount: Double, total: Double
     ) -> some View {
         let pct = total > 0 ? amount / total : 0
         return HStack(spacing: 12) {
-            Image(systemName: category.iconName)
+            Image(systemName: item.iconName)
                 .font(.title3)
-                .foregroundStyle(category.color)
+                .foregroundStyle(item.color)
                 .frame(width: 32)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(String(localized: String.LocalizationValue(category.localizedKey)))
+                Text(item.displayName)
                     .font(.subheadline.weight(.medium))
                 GeometryReader { geo in
                     RoundedRectangle(cornerRadius: 2)
-                        .fill(category.color.opacity(0.3))
+                        .fill(item.color.opacity(0.3))
                         .frame(width: geo.size.width)
                         .overlay(alignment: .leading) {
                             RoundedRectangle(cornerRadius: 2)
-                                .fill(category.color)
+                                .fill(item.color)
                                 .frame(width: geo.size.width * pct)
                         }
                 }

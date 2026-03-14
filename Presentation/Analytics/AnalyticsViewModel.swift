@@ -43,10 +43,19 @@ final class AnalyticsViewModel {
     private(set) var stats: DashboardStats = .empty
     private(set) var isLoading = false
 
-    var sortedExpenses: [(category: Category, amount: Double)] {
+    /// Custom category snapshots for resolving display info.
+    var customCategories: [CustomCategorySnapshot] = []
+
+    var sortedExpenses: [(categoryItem: CategoryItem, amount: Double)] {
         stats.expensesByCategory
             .sorted { $0.value > $1.value }
-            .map { (category: $0.key, amount: $0.value) }
+            .map { (
+                categoryItem: CategoryItem.from(
+                    storedValue: $0.key,
+                    customCategories: customCategories
+                ),
+                amount: $0.value
+            ) }
     }
 
     // MARK: - Dependencies

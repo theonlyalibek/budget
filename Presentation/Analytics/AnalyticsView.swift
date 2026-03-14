@@ -8,8 +8,11 @@ struct AnalyticsView: View {
     @State private var viewModel: AnalyticsViewModel
     @EnvironmentObject private var container: DIContainer
 
-    init(viewModel: AnalyticsViewModel) {
+    private let customCategoriesBinding: [CustomCategorySnapshot]
+
+    init(viewModel: AnalyticsViewModel, customCategories: [CustomCategorySnapshot] = []) {
         _viewModel = State(wrappedValue: viewModel)
+        self.customCategoriesBinding = customCategories
     }
 
     var body: some View {
@@ -24,7 +27,10 @@ struct AnalyticsView: View {
                 .padding()
             }
             .navigationTitle(String(localized: "tab_analytics"))
-            .onAppear { viewModel.loadStats() }
+            .onAppear {
+                viewModel.customCategories = customCategoriesBinding
+                viewModel.loadStats()
+            }
             .onChange(of: viewModel.selectedPeriod) { _, _ in
                 viewModel.loadStats()
             }
@@ -32,9 +38,10 @@ struct AnalyticsView: View {
             .overlay {
                 if viewModel.isLoading { ProgressView() }
             }
-            .navigationDestination(for: Category.self) { category in
+            .navigationDestination(for: String.self) { categoryKey in
                 CategoryDetailView(
-                    category: category,
+                    categoryKey: categoryKey,
+                    customCategories: viewModel.customCategories,
                     repository: container.transactionRepository
                 )
             }
@@ -105,13 +112,13 @@ struct AnalyticsView: View {
             )
             .frame(height: 200)
         } else if !expenses.isEmpty {
-            Chart(expenses, id: \.category) { item in
+            Chart(expenses, id: \.categoryItem) { item in
                 SectorMark(
                     angle: .value("amount", item.amount),
                     innerRadius: .ratio(0.6),
                     angularInset: 1.5
                 )
-                .foregroundStyle(item.category.color)
+                .foregroundStyle(item.categoryItem.color)
                 .cornerRadius(4)
             }
             .frame(height: 220)
@@ -142,10 +149,10 @@ struct AnalyticsView: View {
                     .padding(.horizontal, 4)
                     .padding(.bottom, 4)
 
-                ForEach(expenses, id: \.category) { item in
-                    NavigationLink(value: item.category) {
+                ForEach(expenses, id: \.categoryItem) { item in
+                    NavigationLink(value: item.categoryItem.storageKey) {
                         analyticsCategoryRow(
-                            category: item.category,
+                            item: item.categoryItem,
                             amount: item.amount,
                             total: viewModel.stats.totalExpenses
                         )
@@ -160,25 +167,25 @@ struct AnalyticsView: View {
     }
 
     private func analyticsCategoryRow(
-        category: Category, amount: Double, total: Double
+        item: CategoryItem, amount: Double, total: Double
     ) -> some View {
         let pct = total > 0 ? amount / total : 0
         return HStack(spacing: 12) {
-            Image(systemName: category.iconName)
+            Image(systemName: item.iconName)
                 .font(.title3)
-                .foregroundStyle(category.color)
+                .foregroundStyle(item.color)
                 .frame(width: 32)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(String(localized: String.LocalizationValue(category.localizedKey)))
+                Text(item.displayName)
                     .font(.subheadline.weight(.medium))
                 GeometryReader { geo in
                     RoundedRectangle(cornerRadius: 2)
-                        .fill(category.color.opacity(0.3))
+                        .fill(item.color.opacity(0.3))
                         .frame(width: geo.size.width)
                         .overlay(alignment: .leading) {
                             RoundedRectangle(cornerRadius: 2)
-                                .fill(category.color)
+                                .fill(item.color)
                                 .frame(width: geo.size.width * pct)
                         }
                 }

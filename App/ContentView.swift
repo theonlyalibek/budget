@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject private var container: DIContainer
+    @State private var customCategories: [CustomCategorySnapshot] = []
 
     var body: some View {
         TabView {
@@ -9,7 +10,8 @@ struct ContentView: View {
                 DashboardView(
                     viewModel: DashboardViewModel(
                         getStatsUseCase: container.getDashboardStatsUseCase
-                    )
+                    ),
+                    customCategories: customCategories
                 )
             }
 
@@ -17,14 +19,16 @@ struct ContentView: View {
                 HistoryView(
                     viewModel: HistoryViewModel(
                         repository: container.transactionRepository
-                    )
+                    ),
+                    customCategories: customCategories
                 )
             }
 
             Tab(String(localized: "tab_add"), systemImage: "plus.circle.fill") {
                 AddTransactionView(
                     viewModel: AddTransactionViewModel(
-                        addTransactionUseCase: container.addTransactionUseCase
+                        addTransactionUseCase: container.addTransactionUseCase,
+                        customCategories: customCategories
                     )
                 )
             }
@@ -33,7 +37,8 @@ struct ContentView: View {
                 AnalyticsView(
                     viewModel: AnalyticsViewModel(
                         getStatsUseCase: container.getDashboardStatsUseCase
-                    )
+                    ),
+                    customCategories: customCategories
                 )
             }
 
@@ -41,5 +46,18 @@ struct ContentView: View {
                 SettingsView()
             }
         }
+        .onAppear { reloadCustomCategories() }
+        .onReceive(NotificationCenter.default.publisher(for: .customCategoriesDidChange)) { _ in
+            reloadCustomCategories()
+        }
     }
+
+    private func reloadCustomCategories() {
+        customCategories = container.loadCustomCategorySnapshots()
+    }
+}
+
+extension Notification.Name {
+    /// Posted when custom categories are created, updated, or deleted.
+    static let customCategoriesDidChange = Notification.Name("customCategoriesDidChange")
 }

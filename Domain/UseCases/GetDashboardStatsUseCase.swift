@@ -20,15 +20,14 @@ final class GetDashboardStatsUseCase {
 
         var totalIncome: Double = 0
         var totalExpenses: Double = 0
-        var expensesByCategory: [Category: Double] = [:]
+        var expensesByCategory: [String: Double] = [:]
 
         for transaction in transactions {
             if transaction.isIncome {
                 totalIncome += transaction.amount
             } else {
                 totalExpenses += transaction.amount
-                let category = Category(rawValue: transaction.category) ?? .other
-                expensesByCategory[category, default: 0] += transaction.amount
+                expensesByCategory[transaction.category, default: 0] += transaction.amount
             }
         }
 

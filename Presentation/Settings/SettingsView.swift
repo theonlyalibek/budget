@@ -202,7 +202,17 @@ struct SettingsView: View {
     private var categoriesSection: some View {
         Section {
             NavigationLink {
-                CategoriesManagerView()
+                CategoriesManagerView(
+                    viewModel: CategoriesManagerViewModel(
+                        repository: container.customCategoryRepository,
+                        createCategoryUseCase: container.createCustomCategoryUseCase,
+                        updateCategoryUseCase: container.updateCustomCategoryUseCase,
+                        deleteCategoryUseCase: container.deleteCustomCategoryUseCase,
+                        createSubcategoryUseCase: container.createCustomSubcategoryUseCase,
+                        updateSubcategoryUseCase: container.updateCustomSubcategoryUseCase,
+                        deleteSubcategoryUseCase: container.deleteCustomSubcategoryUseCase
+                    )
+                )
             } label: {
                 Label(String(localized: "categories_title"), systemImage: "square.grid.2x2")
             }

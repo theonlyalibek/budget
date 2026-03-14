@@ -36,7 +36,8 @@ final class HistoryViewModel {
     private(set) var errorMessage: String?
 
     var selectedSegment: HistorySegment = .all
-    var filterCategories: Set<Category> = []
+    /// Raw category keys — system rawValues or "custom:<UUID>" strings.
+    var filterCategories: Set<String> = []
     var filterStartDate: Date?
     var filterEndDate: Date?
 
@@ -71,7 +72,7 @@ final class HistoryViewModel {
                 filter = TransactionFilter(
                     startDate: start,
                     endDate: filterEndDate,
-                    category: filter.category,
+                    categoryRaw: filter.categoryRaw,
                     isIncome: filter.isIncome
                 )
             }
@@ -83,8 +84,7 @@ final class HistoryViewModel {
             if filterCategories.isEmpty {
                 filtered = all
             } else {
-                let categoryNames = filterCategories.map(\.rawValue)
-                filtered = all.filter { categoryNames.contains($0.category) }
+                filtered = all.filter { filterCategories.contains($0.category) }
             }
 
             sections = groupByDate(filtered)

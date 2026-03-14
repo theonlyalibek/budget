@@ -2,11 +2,15 @@ import SwiftUI
 
 struct HistoryView: View {
 
+    @EnvironmentObject private var container: DIContainer
     @State private var viewModel: HistoryViewModel
     @State private var showFilters = false
+    @State private var transactionToEdit: Transaction?
+    let customCategories: [CustomCategorySnapshot]
 
-    init(viewModel: HistoryViewModel) {
+    init(viewModel: HistoryViewModel, customCategories: [CustomCategorySnapshot] = []) {
         _viewModel = State(wrappedValue: viewModel)
+        self.customCategories = customCategories
     }
 
     var body: some View {
@@ -62,13 +66,35 @@ struct HistoryView: View {
                     selectedCategories: $viewModel.filterCategories,
                     startDate: $viewModel.filterStartDate,
                     endDate: $viewModel.filterEndDate,
+                    customCategories: customCategories,
                     onApply: { viewModel.loadTransactions() },
                     onReset: { viewModel.resetFilters() }
                 )
                 .presentationDetents([.medium, .large])
             }
             .navigationDestination(for: Transaction.self) { transaction in
-                TransactionDetailView(transaction: transaction)
+                TransactionDetailView(
+                    transaction: transaction,
+                    customCategories: customCategories
+                )
+            }
+            .sheet(item: $transactionToEdit) { transaction in
+                NavigationStack {
+                    EditTransactionView(
+                        viewModel: EditTransactionViewModel(
+                            transaction: transaction,
+                            updateUseCase: container.updateTransactionUseCase,
+                            deleteUseCase: container.deleteTransactionUseCase,
+                            customCategories: customCategories
+                        )
+                    )
+                }
+            }
+            .onChange(of: transactionToEdit) { _, newValue in
+                // Reload after returning from edit (newValue becomes nil on dismiss)
+                if newValue == nil {
+                    viewModel.loadTransactions()
+                }
             }
         }
     }
@@ -90,6 +116,14 @@ struct HistoryView: View {
                                 Label(String(localized: "delete"), systemImage: "trash")
                             }
                         }
+                        .swipeActions(edge: .trailing) {
+                            Button {
+                                transactionToEdit = transaction
+                            } label: {
+                                Label(String(localized: "edit"), systemImage: "pencil")
+                            }
+                            .tint(.blue)
+                        }
                     }
                 } header: {
                     Text(section.title)
@@ -102,24 +136,45 @@ struct HistoryView: View {
     // MARK: - Row
 
     private func historyTransactionRow(_ transaction: Transaction) -> some View {
-        let category = Category(rawValue: transaction.category) ?? .other
+        let catItem = CategoryItem.from(
+            storedValue: transaction.category,
+            customCategories: customCategories
+        )
+        let subcategoryName: String = {
+            if transaction.subcategory.isEmpty { return "" }
+            if transaction.subcategory.hasPrefix("custom_sub:") {
+                // Resolve from custom category's subcategory snapshots
+                return catItem.subcategoryItems
+                    .first { $0.storageKey == transaction.subcategory }?
+                    .displayName ?? ""
+            }
+            return Category.localizedSubcategory(transaction.subcategory)
+        }()
+
         return HStack(spacing: 12) {
-            Image(systemName: category.iconName)
+            Image(systemName: catItem.iconName)
                 .font(.title3)
-                .foregroundStyle(category.color)
+                .foregroundStyle(catItem.color)
                 .frame(width: 36, height: 36)
-                .background(category.color.opacity(0.12))
+                .background(catItem.color.opacity(0.12))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(transaction.note.isEmpty
-                     ? String(localized: String.LocalizationValue(category.localizedKey))
+                     ? catItem.displayName
                      : transaction.note)
                     .font(.subheadline.weight(.medium))
                     .lineLimit(1)
-                Text(String(localized: String.LocalizationValue(category.localizedKey)))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                HStack(spacing: 4) {
+                    Text(catItem.displayName)
+                    if !subcategoryName.isEmpty {
+                        Text("·")
+                        Text(subcategoryName)
+                    }
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
             }
 
             Spacer()

@@ -11,6 +11,9 @@ final class DashboardViewModel {
     private(set) var isLoading = false
     private(set) var errorMessage: String?
 
+    /// Custom category snapshots for resolving display info.
+    var customCategories: [CustomCategorySnapshot] = []
+
     // MARK: - Dependencies
 
     private let getStatsUseCase: GetDashboardStatsUseCase
@@ -38,9 +41,15 @@ final class DashboardViewModel {
     }
 
     /// Sorted categories for the pie chart — largest slice first.
-    var sortedExpenses: [(category: Category, amount: Double)] {
+    var sortedExpenses: [(categoryItem: CategoryItem, amount: Double)] {
         stats.expensesByCategory
             .sorted { $0.value > $1.value }
-            .map { (category: $0.key, amount: $0.value) }
+            .map { (
+                categoryItem: CategoryItem.from(
+                    storedValue: $0.key,
+                    customCategories: customCategories
+                ),
+                amount: $0.value
+            ) }
     }
 }

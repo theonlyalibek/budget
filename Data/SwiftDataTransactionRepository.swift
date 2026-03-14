@@ -21,8 +21,7 @@ final class SwiftDataTransactionRepository: TransactionRepositoryProtocol {
         if let endDate = filter.endDate {
             predicates.append(#Predicate<Transaction> { $0.date <= endDate })
         }
-        if let category = filter.category {
-            let categoryRaw = category.rawValue
+        if let categoryRaw = filter.categoryRaw {
             predicates.append(#Predicate<Transaction> { $0.category == categoryRaw })
         }
         if let isIncome = filter.isIncome {
@@ -54,6 +53,14 @@ final class SwiftDataTransactionRepository: TransactionRepositoryProtocol {
         for transaction in transactions {
             modelContext.insert(transaction)
         }
+        try modelContext.save()
+    }
+
+    // MARK: - Update
+
+    func update(_ transaction: Transaction) throws {
+        // SwiftData tracks changes to @Model objects automatically;
+        // we just need to persist to disk.
         try modelContext.save()
     }
 

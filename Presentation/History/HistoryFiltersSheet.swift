@@ -1,10 +1,12 @@
 import SwiftUI
 
 /// Filter sheet for History — Figma `Filters Sheet`.
+/// Uses raw category keys (String) to support both system and custom categories.
 struct HistoryFiltersSheet: View {
-    @Binding var selectedCategories: Set<Category>
+    @Binding var selectedCategories: Set<String>
     @Binding var startDate: Date?
     @Binding var endDate: Date?
+    var customCategories: [CustomCategorySnapshot]
     var onApply: () -> Void
     var onReset: () -> Void
 
@@ -14,6 +16,15 @@ struct HistoryFiltersSheet: View {
         byAdding: .month, value: -1, to: .now
     ) ?? .now
     @State private var localEnd: Date = .now
+
+    /// All filterable categories (system minus income, plus custom).
+    private var filterItems: [CategoryItem] {
+        var items: [CategoryItem] = Category.allCases
+            .filter { $0 != .income }
+            .map { .system($0) }
+        items.append(contentsOf: customCategories.map { .custom($0) })
+        return items
+    }
 
     var body: some View {
         NavigationStack {
@@ -38,18 +49,18 @@ struct HistoryFiltersSheet: View {
 
                 // Category filter
                 Section(String(localized: "categories_filter")) {
-                    ForEach(Category.allCases.filter { $0 != .income }) { cat in
+                    ForEach(filterItems) { item in
                         Button {
-                            toggleCategory(cat)
+                            toggleCategory(item.storageKey)
                         } label: {
                             HStack(spacing: 12) {
-                                Image(systemName: cat.iconName)
-                                    .foregroundStyle(cat.color)
+                                Image(systemName: item.iconName)
+                                    .foregroundStyle(item.color)
                                     .frame(width: 24)
-                                Text(String(localized: String.LocalizationValue(cat.localizedKey)))
+                                Text(item.displayName)
                                     .foregroundStyle(.primary)
                                 Spacer()
-                                if selectedCategories.contains(cat) {
+                                if selectedCategories.contains(item.storageKey) {
                                     Image(systemName: "checkmark")
                                         .foregroundStyle(.blue)
                                 }
@@ -85,11 +96,11 @@ struct HistoryFiltersSheet: View {
         }
     }
 
-    private func toggleCategory(_ cat: Category) {
-        if selectedCategories.contains(cat) {
-            selectedCategories.remove(cat)
+    private func toggleCategory(_ key: String) {
+        if selectedCategories.contains(key) {
+            selectedCategories.remove(key)
         } else {
-            selectedCategories.insert(cat)
+            selectedCategories.insert(key)
         }
     }
 }

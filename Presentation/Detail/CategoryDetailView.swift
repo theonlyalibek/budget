@@ -4,9 +4,14 @@ import SwiftUI
 struct CategoryDetailView: View {
     @State private var viewModel: CategoryDetailViewModel
 
-    init(category: Category, repository: TransactionRepositoryProtocol) {
+    init(
+        categoryKey: String,
+        customCategories: [CustomCategorySnapshot],
+        repository: TransactionRepositoryProtocol
+    ) {
         _viewModel = State(wrappedValue: CategoryDetailViewModel(
-            category: category,
+            categoryKey: categoryKey,
+            customCategories: customCategories,
             repository: repository
         ))
     }
@@ -20,7 +25,6 @@ struct CategoryDetailView: View {
                 )
             } else {
                 List {
-                    // Total header
                     Section {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(String(localized: "total"))
@@ -35,7 +39,6 @@ struct CategoryDetailView: View {
                         .padding(.vertical, 4)
                     }
 
-                    // Transaction list
                     Section {
                         ForEach(viewModel.transactions, id: \.id) { transaction in
                             NavigationLink(value: transaction) {
@@ -47,9 +50,7 @@ struct CategoryDetailView: View {
                 .listStyle(.insetGrouped)
             }
         }
-        .navigationTitle(
-            String(localized: String.LocalizationValue(viewModel.category.localizedKey))
-        )
+        .navigationTitle(viewModel.categoryItem.displayName)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { viewModel.load() }
         .overlay {
@@ -64,7 +65,7 @@ struct CategoryDetailView: View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(transaction.note.isEmpty
-                     ? String(localized: String.LocalizationValue(viewModel.category.localizedKey))
+                     ? viewModel.categoryItem.displayName
                      : transaction.note)
                     .font(.subheadline.weight(.medium))
                     .lineLimit(1)
