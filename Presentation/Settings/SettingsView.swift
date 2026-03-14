@@ -160,6 +160,11 @@ struct SettingsView: View {
     }
 
     // MARK: - Import (moved from tab bar)
+    //
+    // ⚠️ FREE FEATURE — must never be wrapped in FeatureGate or any premium check.
+    // This row gives access to the base Kaspi PDF import, which is free for all users.
+    // The gated "Advanced Import" (Halyk, OCR, multi-account) lives separately in
+    // premiumFeaturesSection below and is an entirely different NavigationLink target.
 
     private var importSection: some View {
         Section {

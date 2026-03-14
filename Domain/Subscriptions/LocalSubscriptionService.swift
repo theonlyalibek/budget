@@ -24,11 +24,20 @@ final class LocalSubscriptionService: SubscriptionServiceProtocol {
 
     private static let defaultsKey = "budget_premium_unlocked"
 
+    /// Injected storage — defaults to `.standard` in production.
+    /// Pass a custom `UserDefaults` suite in unit tests to avoid polluting
+    /// the real user's defaults and enable deterministic test isolation.
+    private let defaults: UserDefaults
+
     // MARK: - Init
 
-    init() {
-        // Free tier by default in production; read persisted flag for QA use.
-        isSubscribed = UserDefaults.standard.bool(forKey: Self.defaultsKey)
+    /// - Parameter defaults: The `UserDefaults` suite to use for persisting
+    ///   entitlement state. Defaults to `.standard`. Pass a test suite in
+    ///   unit tests: `UserDefaults(suiteName: "com.budget.tests")!`
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        // Free tier by default; reads persisted flag for QA / debug use.
+        isSubscribed = defaults.bool(forKey: Self.defaultsKey)
     }
 
     // MARK: - SubscriptionServiceProtocol
@@ -52,7 +61,7 @@ final class LocalSubscriptionService: SubscriptionServiceProtocol {
     /// Exposed via Settings → Debug in non-release builds only.
     func toggleDebugSubscription() {
         isSubscribed.toggle()
-        UserDefaults.standard.set(isSubscribed, forKey: Self.defaultsKey)
+        defaults.set(isSubscribed, forKey: Self.defaultsKey)
     }
     #endif
 }

@@ -1507,6 +1507,30 @@
         "kk" : { "stringUnit" : { "state" : "translated", "value" : "Төлем келесі жаңартуда қолжетімді болады" } }
       }
     },
+    "paywall_nothing_to_restore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Активных покупок не найдено. Если вы уже подписались — проверьте, что используете тот же Apple ID." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No active purchases found. If you've already subscribed, make sure you're using the same Apple ID." } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Белсенді сатып алулар табылмады. Егер жазылсаңыз, сол Apple ID пайдаланылатынын тексеріңіз." } }
+      }
+    },
+    "restore_result_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Восстановление покупок" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Restore purchases" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Сатып алуларды қалпына келтіру" } }
+      }
+    },
+    "ok" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "OK" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "OK" } }
+      }
+    },
 
     "premium_active_title" : {
       "extractionState" : "manual",

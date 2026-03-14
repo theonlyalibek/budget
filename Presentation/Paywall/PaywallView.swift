@@ -14,7 +14,12 @@ struct PaywallView: View {
     @Environment(LocalSubscriptionService.self) private var service
     @Environment(\.dismiss) private var dismiss
 
-    @State private var showRestoreToast = false
+    /// Shown below subscribe button while its no-op animation plays.
+    @State private var showComingSoonToast = false
+    /// True while restorePurchases() is in flight; disables the restore button.
+    @State private var isRestoring = false
+    /// Non-nil drives the restore result alert (error or "nothing found" message).
+    @State private var restoreAlertMessage: String?
 
     var body: some View {
         NavigationStack {
@@ -35,7 +40,20 @@ struct PaywallView: View {
                 }
             }
             .overlay {
-                if showRestoreToast { restoreToast }
+                if showComingSoonToast { comingSoonToast }
+            }
+            .alert(
+                String(localized: "restore_result_title"),
+                isPresented: Binding(
+                    get: { restoreAlertMessage != nil },
+                    set: { if !$0 { restoreAlertMessage = nil } }
+                )
+            ) {
+                Button(String(localized: "ok"), role: .cancel) {
+                    restoreAlertMessage = nil
+                }
+            } message: {
+                Text(restoreAlertMessage ?? "")
             }
         }
     }
@@ -110,13 +128,14 @@ struct PaywallView: View {
 
     private var actionButtons: some View {
         VStack(spacing: 12) {
-            // Primary CTA — StoreKit2 hook goes here
+            // Primary CTA — no-op in release until StoreKit2 is wired.
+            // StoreKit2 plug-in: replace body with
+            //   Task { try await service.purchase(productID: "com.budget.premium.monthly") }
             Button {
-                // TODO: StoreKit2 purchase
-                // Task { try await service.purchase(productID: "com.budget.premium.monthly") }
-                showRestoreToast = true // Temporary: show "coming soon" feedback
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    showRestoreToast = false
+                showComingSoonToast = true
+                Task {
+                    try? await Task.sleep(for: .seconds(1.5))
+                    showComingSoonToast = false
                 }
             } label: {
                 Text(String(localized: "paywall_subscribe"))
@@ -125,18 +144,45 @@ struct PaywallView: View {
                     .padding(.vertical, 14)
             }
             .buttonStyle(.borderedProminent)
+            .disabled(isRestoring)
 
-            // Restore link — StoreKit2 hook goes here
+            // Restore link — calls protocol method; surfaces errors to user.
+            // StoreKit2 plug-in: restorePurchases() implementation handles
+            //   Transaction.currentEntitlements and updates isSubscribed.
             Button {
-                // TODO: StoreKit2 restore
-                // Task { try await service.restorePurchases() }
-                Task { try? await service.restorePurchases() }
+                isRestoring = true
+                Task {
+                    defer { isRestoring = false }
+                    do {
+                        try await service.restorePurchases()
+                        // Protocol conformance succeeded — check if state changed.
+                        if service.isSubscribed {
+                            // Premium now active; dismiss paywall.
+                            dismiss()
+                        } else {
+                            // Restore ran but found no active purchases.
+                            restoreAlertMessage = String(localized: "paywall_nothing_to_restore")
+                        }
+                    } catch {
+                        // Surface real StoreKit / network errors as readable text.
+                        restoreAlertMessage = error.localizedDescription
+                    }
+                }
             } label: {
-                Text(String(localized: "paywall_restore"))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                Group {
+                    if isRestoring {
+                        ProgressView()
+                            .tint(.secondary)
+                    } else {
+                        Text(String(localized: "paywall_restore"))
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .frame(minHeight: 24)
             }
             .buttonStyle(.plain)
+            .disabled(isRestoring)
 
             Text(String(localized: "paywall_legal"))
                 .font(.caption2)
@@ -145,9 +191,9 @@ struct PaywallView: View {
         }
     }
 
-    // MARK: - Toast
+    // MARK: - Coming Soon Toast (subscribe placeholder feedback)
 
-    private var restoreToast: some View {
+    private var comingSoonToast: some View {
         VStack {
             Spacer()
             Text(String(localized: "paywall_coming_soon"))
@@ -159,6 +205,6 @@ struct PaywallView: View {
                 .padding(.bottom, 40)
         }
         .transition(.move(edge: .bottom).combined(with: .opacity))
-        .animation(.spring(duration: 0.3), value: showRestoreToast)
+        .animation(.spring(duration: 0.3), value: showComingSoonToast)
     }
 }
