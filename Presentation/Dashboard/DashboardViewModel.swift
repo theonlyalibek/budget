@@ -41,5 +41,6 @@ final class DashboardViewModel {
     var sortedExpenses: [(category: Category, amount: Double)] {
         stats.expensesByCategory
             .sorted { $0.value > $1.value }
+            .map { (category: $0.key, amount: $0.value) }
     }
 }
