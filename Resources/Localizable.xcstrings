@@ -1215,6 +1215,70 @@
         "kk" : { "stringUnit" : { "state" : "translated", "value" : "Толығырақ" } }
       }
     },
+    "insight_detail_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "AI Анализ" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "AI Analysis" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "AI Талдау" } }
+      }
+    },
+    "insight_subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Персональный финансовый анализ" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personal financial analysis" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жеке қаржылық талдау" } }
+      }
+    },
+    "insight_top_category" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Топ категория расходов" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Top spending category" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жоғарғы шығын санаты" } }
+      }
+    },
+    "insight_tip_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Совет" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tip" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Кеңес" } }
+      }
+    },
+    "insight_tip_body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Отслеживайте расходы каждую неделю, чтобы замечать тренды раньше, чем они станут проблемой." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Track your spending weekly to spot trends before they become problems." } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Апта сайын шығындарды бақылаңыз — үрдістерді ерте анықтаңыз." } }
+      }
+    },
+    "insight_coming_soon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Персональные AI-рекомендации — в следующем обновлении" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personalised AI recommendations coming soon" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жеке AI ұсыныстары жақында қосылады" } }
+      }
+    },
+    "mark_as_subscription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Отметить как подписку" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Mark as subscription" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жазылым ретінде белгілеу" } }
+      }
+    },
+    "none" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нет данных" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "None" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жоқ" } }
+      }
+    },
     "import_statement" : {
       "extractionState" : "manual",
       "localizations" : {

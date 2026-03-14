@@ -4,6 +4,7 @@ import Charts
 struct DashboardView: View {
 
     @State private var viewModel: DashboardViewModel
+    @State private var showInsightDetail = false
     @EnvironmentObject private var container: DIContainer
 
     init(viewModel: DashboardViewModel) {
@@ -27,6 +28,9 @@ struct DashboardView: View {
             .refreshable { viewModel.loadStats() }
             .overlay {
                 if viewModel.isLoading { ProgressView() }
+            }
+            .sheet(isPresented: $showInsightDetail) {
+                AIInsightDetailView(stats: viewModel.stats)
             }
             .navigationDestination(for: Category.self) { category in
                 CategoryDetailView(
@@ -102,7 +106,8 @@ struct DashboardView: View {
         if viewModel.stats.totalExpenses > 0 {
             InsightCard(
                 title: String(localized: "insight_title"),
-                message: String(localized: "insight_placeholder")
+                message: String(localized: "insight_placeholder"),
+                onTapDetail: { showInsightDetail = true }
             )
         }
     }

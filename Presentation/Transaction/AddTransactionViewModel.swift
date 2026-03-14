@@ -12,6 +12,7 @@ final class AddTransactionViewModel {
     var category: Category = .food
     var note: String = ""
     var isIncome: Bool = false
+    var isSubscription: Bool = false
 
     // MARK: - UI State
 
@@ -56,6 +57,7 @@ final class AddTransactionViewModel {
                 date: date,
                 category: category,
                 note: note,
+                isSubscription: isSubscription,
                 isIncome: isIncome
             )
             didSave = true
@@ -73,5 +75,6 @@ final class AddTransactionViewModel {
         category = .food
         note = ""
         isIncome = false
+        isSubscription = false
     }
 }

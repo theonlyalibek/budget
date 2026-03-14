@@ -113,7 +113,7 @@ struct AddTransactionView: View {
             DatePicker(
                 String(localized: "date"),
                 selection: $viewModel.date,
-                displayedComponents: .date
+                displayedComponents: [.date, .hourAndMinute]
             )
 
             TextField(
@@ -122,6 +122,8 @@ struct AddTransactionView: View {
                 axis: .vertical
             )
             .lineLimit(1...3)
+
+            Toggle(String(localized: "mark_as_subscription"), isOn: $viewModel.isSubscription)
         }
     }
 
