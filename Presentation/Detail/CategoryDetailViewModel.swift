@@ -31,7 +31,7 @@ final class CategoryDetailViewModel {
     func load() {
         isLoading = true
         do {
-            let filter = TransactionFilter(category: category.rawValue, isIncome: false)
+            let filter = TransactionFilter(category: category, isIncome: false)
             transactions = try repository.fetch(filter: filter)
                 .sorted { $0.date > $1.date }
         } catch {
