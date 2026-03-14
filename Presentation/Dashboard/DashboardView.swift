@@ -5,6 +5,8 @@ struct DashboardView: View {
 
     @State private var viewModel: DashboardViewModel
     @State private var showInsightDetail = false
+    @State private var showPaywall = false
+    @Environment(LocalSubscriptionService.self) private var subscriptionService
     @EnvironmentObject private var container: DIContainer
 
     init(viewModel: DashboardViewModel) {
@@ -31,6 +33,9 @@ struct DashboardView: View {
             }
             .sheet(isPresented: $showInsightDetail) {
                 AIInsightDetailView(stats: viewModel.stats)
+            }
+            .sheet(isPresented: $showPaywall) {
+                PaywallView(feature: .aiCoach)
             }
             .navigationDestination(for: Category.self) { category in
                 CategoryDetailView(
@@ -107,7 +112,13 @@ struct DashboardView: View {
             InsightCard(
                 title: String(localized: "insight_title"),
                 message: String(localized: "insight_placeholder"),
-                onTapDetail: { showInsightDetail = true }
+                onTapDetail: {
+                    if subscriptionService.isUnlocked(.aiCoach) {
+                        showInsightDetail = true
+                    } else {
+                        showPaywall = true
+                    }
+                }
             )
         }
     }

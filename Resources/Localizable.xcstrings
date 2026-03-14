@@ -1327,6 +1327,277 @@
         "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жақында" } }
       }
     },
+
+    "badge_pro" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "PRO" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "PRO" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "PRO" } }
+      }
+    },
+    "close" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Закрыть" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Close" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жабу" } }
+      }
+    },
+
+    "feature_ai_coach_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "AI Финансовый советник" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "AI Financial Coach" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "AI Қаржы кеңесшісі" } }
+      }
+    },
+    "feature_ai_coach_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Персональный анализ расходов и советы по экономии на основе ваших данных." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personalised spending analysis and savings tips based on your data." } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Деректеріңізге негізделген жеке шығын талдауы және үнемдеу кеңестері." } }
+      }
+    },
+    "feature_financial_lessons_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Финансовая грамотность" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Financial Literacy" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Қаржылық сауаттылық" } }
+      }
+    },
+    "feature_financial_lessons_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Уроки и статьи по личным финансам для казахстанских пользователей." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lessons and articles on personal finance for Kazakhstani users." } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Қазақстандық пайдаланушыларға арналған жеке қаржы сабақтары мен мақалалары." } }
+      }
+    },
+    "feature_advanced_import_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Расширенный импорт" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Advanced Import" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Кеңейтілген импорт" } }
+      }
+    },
+    "feature_advanced_import_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Импорт выписок Halyk Bank, распознавание скриншотов и объединение счетов." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Halyk Bank statement import, screenshot OCR, and multi-account merge." } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Halyk Bank үзінділерін импорттау, скриншоттарды тану және шоттарды біріктіру." } }
+      }
+    },
+
+    "benefit_ai_1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Еженедельный AI-отчёт по расходам" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Weekly AI spending report" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Апталық AI шығын есебі" } }
+      }
+    },
+    "benefit_ai_2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Персональные советы по экономии в ₸" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personalised savings tips in ₸" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "₸ бойынша жеке үнемдеу кеңестері" } }
+      }
+    },
+    "benefit_ai_3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Прогноз бюджета на следующий месяц" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Next-month budget forecast" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Келесі айдың бюджет болжамы" } }
+      }
+    },
+    "benefit_lessons_1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "20+ уроков по личным финансам" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "20+ personal finance lessons" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "20+ жеке қаржы сабақтары" } }
+      }
+    },
+    "benefit_lessons_2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Адаптировано для казахстанского рынка" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Tailored for the Kazakhstani market" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Қазақстан нарығына бейімделген" } }
+      }
+    },
+    "benefit_import_1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Импорт выписок Halyk Bank" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Halyk Bank statement import" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Halyk Bank үзінділерін импорттау" } }
+      }
+    },
+    "benefit_import_2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Распознавание скриншотов (OCR)" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Screenshot recognition (OCR)" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Скриншоттарды тану (OCR)" } }
+      }
+    },
+    "benefit_import_3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Объединение нескольких счетов" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Multi-account merge" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Бірнеше шотты біріктіру" } }
+      }
+    },
+
+    "paywall_price_placeholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "₸ в месяц" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "₸ / month" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "₸ / ай" } }
+      }
+    },
+    "paywall_price_note" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Цена будет определена при запуске" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Price will be set at launch" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Баға іске қосу кезінде белгіленеді" } }
+      }
+    },
+    "paywall_subscribe" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Оформить подписку" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Subscribe" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жазылу" } }
+      }
+    },
+    "paywall_restore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Восстановить покупки" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Restore purchases" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Сатып алуларды қалпына келтіру" } }
+      }
+    },
+    "paywall_legal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Подписка автоматически продлевается. Отмена — в настройках App Store." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Subscription renews automatically. Cancel anytime in App Store settings." } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жазылым автоматты түрде жаңарады. App Store параметрлерінде болдырмауға болады." } }
+      }
+    },
+    "paywall_coming_soon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Оплата будет доступна в следующем обновлении" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Payment coming in next update" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Төлем келесі жаңартуда қолжетімді болады" } }
+      }
+    },
+
+    "premium_active_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Премиум активен" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Premium active" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Премиум белсенді" } }
+      }
+    },
+    "premium_active_subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Все функции разблокированы" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "All features unlocked" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Барлық мүмкіндіктер ашылды" } }
+      }
+    },
+    "premium_cta_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Разблокировать всё" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Unlock everything" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Барлығын ашу" } }
+      }
+    },
+    "premium_cta_subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "AI советник · уроки · расширенный импорт" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "AI coach · lessons · advanced import" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "AI кеңесші · сабақтар · кеңейтілген импорт" } }
+      }
+    },
+    "premium_features_section" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Премиум функции" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Premium Features" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Премиум мүмкіндіктер" } }
+      }
+    },
+
+    "lessons_coming_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Уроки по личным финансам появятся в следующем обновлении." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Personal finance lessons are coming in the next update." } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жеке қаржы сабақтары келесі жаңартуда пайда болады." } }
+      }
+    },
+    "advanced_import_coming_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Расширенный импорт будет доступен в следующем обновлении." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Advanced import is coming in the next update." } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Кеңейтілген импорт келесі жаңартуда қолжетімді болады." } }
+      }
+    },
+    "advanced_import_planned" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Запланировано" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Planned" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Жоспарланған" } }
+      }
+    },
+    "advanced_import_halyk" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Выписка Halyk Bank (PDF)" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Halyk Bank statement (PDF)" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Halyk Bank үзіндісі (PDF)" } }
+      }
+    },
+    "advanced_import_ocr" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Распознавание скриншота чека" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Receipt screenshot OCR" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Чек скриншотын тану" } }
+      }
+    },
+    "advanced_import_merge" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Объединение Kaspi + Halyk + наличные" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Merge Kaspi + Halyk + cash" } },
+        "kk" : { "stringUnit" : { "state" : "translated", "value" : "Kaspi + Halyk + қолма-қол біріктіру" } }
+      }
+    },
+
     "categories_title" : {
       "extractionState" : "manual",
       "localizations" : {

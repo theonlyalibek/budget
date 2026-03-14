@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingsView: View {
 
     @EnvironmentObject private var container: DIContainer
+    @Environment(LocalSubscriptionService.self) private var subscriptionService
     @State private var showEraseConfirmation = false
     @State private var didErase = false
 
@@ -10,13 +11,18 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 accountSection
+                premiumSection
                 importSection
                 subscriptionsSection
+                premiumFeaturesSection
                 categoriesSection
                 notificationsSection
                 appearanceSection
                 dataSection
                 aboutSection
+                #if DEBUG
+                debugSection
+                #endif
             }
             .navigationTitle(String(localized: "tab_settings"))
             .confirmationDialog(
@@ -57,6 +63,98 @@ struct SettingsView: View {
                     }
                 }
                 .padding(.vertical, 4)
+            }
+        }
+    }
+
+    // MARK: - Premium Status
+
+    private var premiumSection: some View {
+        Section {
+            if subscriptionService.isSubscribed {
+                HStack(spacing: 12) {
+                    Image(systemName: "checkmark.seal.fill")
+                        .font(.title2)
+                        .foregroundStyle(.yellow)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(String(localized: "premium_active_title"))
+                            .font(.subheadline.weight(.semibold))
+                        Text(String(localized: "premium_active_subtitle"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .padding(.vertical, 4)
+            } else {
+                Button {
+                    // PaywallView can show any feature as entry point; aiCoach is primary
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "star.fill")
+                            .font(.title2)
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [.blue, .purple],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                        VStack(alignment: .leading, spacing: 2) {
+                            HStack(spacing: 6) {
+                                Text(String(localized: "premium_cta_title"))
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(.primary)
+                                PremiumBadge()
+                            }
+                            Text(String(localized: "premium_cta_subtitle"))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundStyle(.tertiary)
+                    }
+                    .padding(.vertical, 4)
+                }
+                // NavigationLink to paywall would go here — using Button for now
+                // because PaywallView is presented as sheet, not push
+                .buttonStyle(.plain)
+                .background(
+                    NavigationLink("", destination: PaywallView(feature: .aiCoach))
+                        .opacity(0)
+                )
+            }
+        }
+    }
+
+    // MARK: - Premium Features (gated rows)
+
+    private var premiumFeaturesSection: some View {
+        Section(String(localized: "premium_features_section")) {
+            // Financial literacy — gated
+            FeatureGate(feature: .financialLessons) {
+                // Placeholder: replace with NavigationLink to real LessonsView in future
+                NavigationLink {
+                    FinancialLessonsPlaceholderView()
+                } label: {
+                    Label(
+                        String(localized: "feature_financial_lessons_name"),
+                        systemImage: PremiumFeature.financialLessons.iconName
+                    )
+                }
+            }
+
+            // Advanced import — gated
+            FeatureGate(feature: .advancedImport) {
+                NavigationLink {
+                    AdvancedImportPlaceholderView()
+                } label: {
+                    Label(
+                        String(localized: "feature_advanced_import_name"),
+                        systemImage: PremiumFeature.advancedImport.iconName
+                    )
+                }
             }
         }
     }
@@ -183,6 +281,29 @@ struct SettingsView: View {
             // Silently fail for MVP
         }
     }
+
+    // MARK: - Debug (non-release only)
+
+    #if DEBUG
+    private var debugSection: some View {
+        Section("Debug") {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Premium subscription")
+                        .font(.subheadline)
+                    Text(subscriptionService.isSubscribed ? "Active (local)" : "Inactive")
+                        .font(.caption)
+                        .foregroundStyle(subscriptionService.isSubscribed ? .green : .secondary)
+                }
+                Spacer()
+                Toggle("", isOn: Binding(
+                    get: { subscriptionService.isSubscribed },
+                    set: { _ in subscriptionService.toggleDebugSubscription() }
+                ))
+            }
+        }
+    }
+    #endif
 
     // MARK: - Toast
 

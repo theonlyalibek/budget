@@ -5,6 +5,13 @@ import SwiftData
 final class DIContainer: ObservableObject {
     let modelContainer: ModelContainer
 
+    // MARK: - Subscription
+
+    /// Shared subscription service — injected into SwiftUI environment via BudgetApp.
+    /// To add StoreKit2: create `StoreKitSubscriptionService: SubscriptionServiceProtocol`
+    /// and replace `LocalSubscriptionService()` here. No view code changes required.
+    let subscriptionService = LocalSubscriptionService()
+
     // MARK: - Repositories
 
     lazy var transactionRepository: TransactionRepositoryProtocol = {

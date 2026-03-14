@@ -9,6 +9,9 @@ struct BudgetApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(container)
+                // Injects LocalSubscriptionService as an @Observable environment value.
+                // Child views access it via @Environment(LocalSubscriptionService.self).
+                .environment(container.subscriptionService)
         }
         .modelContainer(container.modelContainer)
     }
