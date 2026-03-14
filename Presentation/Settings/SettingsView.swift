@@ -9,7 +9,11 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             List {
+                accountSection
+                importSection
                 subscriptionsSection
+                categoriesSection
+                notificationsSection
                 appearanceSection
                 dataSection
                 aboutSection
@@ -28,9 +32,48 @@ struct SettingsView: View {
                 Text(String(localized: "erase_all_message"))
             }
             .overlay {
-                if didErase {
-                    eraseToast
+                if didErase { eraseToast }
+            }
+        }
+    }
+
+    // MARK: - Account
+
+    private var accountSection: some View {
+        Section {
+            NavigationLink {
+                ProfileView()
+            } label: {
+                HStack(spacing: 14) {
+                    Image(systemName: "person.crop.circle.fill")
+                        .font(.system(size: 40))
+                        .foregroundStyle(.secondary)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(String(localized: "profile_name_placeholder"))
+                            .font(.headline)
+                        Text(String(localized: "profile_subtitle"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
+                .padding(.vertical, 4)
+            }
+        }
+    }
+
+    // MARK: - Import (moved from tab bar)
+
+    private var importSection: some View {
+        Section {
+            NavigationLink {
+                ImportView(
+                    viewModel: ImportViewModel(
+                        importUseCase: container.importStatementUseCase,
+                        parser: container.kaspiParser
+                    )
+                )
+            } label: {
+                Label(String(localized: "import_statement"), systemImage: "doc.badge.plus")
             }
         }
     }
@@ -51,6 +94,30 @@ struct SettingsView: View {
         }
     }
 
+    // MARK: - Categories
+
+    private var categoriesSection: some View {
+        Section {
+            NavigationLink {
+                CategoriesManagerView()
+            } label: {
+                Label(String(localized: "categories_title"), systemImage: "square.grid.2x2")
+            }
+        }
+    }
+
+    // MARK: - Notifications
+
+    private var notificationsSection: some View {
+        Section {
+            NavigationLink {
+                NotificationsSettingsView()
+            } label: {
+                Label(String(localized: "notifications_title"), systemImage: "bell.badge")
+            }
+        }
+    }
+
     // MARK: - Appearance
 
     private var appearanceSection: some View {
@@ -63,15 +130,6 @@ struct SettingsView: View {
                 Label(String(localized: "system_appearance"), systemImage: "paintbrush")
                     .foregroundStyle(.primary)
             }
-
-            Label {
-                Text(String(localized: "appearance_hint"))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            } icon: {
-                Image(systemName: "info.circle")
-                    .foregroundStyle(.secondary)
-            }
         }
     }
 
@@ -79,6 +137,12 @@ struct SettingsView: View {
 
     private var dataSection: some View {
         Section(String(localized: "data_and_backup")) {
+            NavigationLink {
+                ExportDataView()
+            } label: {
+                Label(String(localized: "export_title"), systemImage: "square.and.arrow.up")
+            }
+
             Button(role: .destructive) {
                 showEraseConfirmation = true
             } label: {
@@ -116,7 +180,7 @@ struct SettingsView: View {
                 didErase = false
             }
         } catch {
-            // Silently fail for MVP — could show alert
+            // Silently fail for MVP
         }
     }
 

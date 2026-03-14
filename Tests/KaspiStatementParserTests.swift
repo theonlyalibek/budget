@@ -1,5 +1,5 @@
 import XCTest
-@testable import Budget
+@testable import budget
 
 final class KaspiStatementParserTests: XCTestCase {
 

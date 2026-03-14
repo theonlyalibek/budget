@@ -1,0 +1,7 @@
+Figma file (Make):
+https://www.figma.com/make/B3n5q49Z4xdDKCzCv2uZR6/Personal-Finance-Tracker-UI?t=zwGDbwhicuqoffyz-0
+
+Notes:
+- RU-first UI
+- Currency: KZT (₸)
+- Keep current style; refine, do not rebuild from scratch

@@ -1,12 +1,14 @@
 import SwiftUI
 import Charts
 
-struct DashboardView: View {
+/// Analytics tab (Аналитика) — Figma Tab 4.
+/// Period-switchable expense breakdown with pie chart and category rows.
+struct AnalyticsView: View {
 
-    @State private var viewModel: DashboardViewModel
+    @State private var viewModel: AnalyticsViewModel
     @EnvironmentObject private var container: DIContainer
 
-    init(viewModel: DashboardViewModel) {
+    init(viewModel: AnalyticsViewModel) {
         _viewModel = State(wrappedValue: viewModel)
     }
 
@@ -14,16 +16,18 @@ struct DashboardView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    balanceCards
-                    insightCard
+                    periodPicker
+                    summaryCards
                     expenseChart
                     categoryBreakdown
                 }
                 .padding()
             }
-            .background(Color(.systemGroupedBackground))
-            .navigationTitle(String(localized: "tab_dashboard"))
+            .navigationTitle(String(localized: "tab_analytics"))
             .onAppear { viewModel.loadStats() }
+            .onChange(of: viewModel.selectedPeriod) { _, _ in
+                viewModel.loadStats()
+            }
             .refreshable { viewModel.loadStats() }
             .overlay {
                 if viewModel.isLoading { ProgressView() }
@@ -37,44 +41,39 @@ struct DashboardView: View {
         }
     }
 
-    // MARK: - Balance Cards
+    // MARK: - Period Picker
 
-    private var balanceCards: some View {
-        VStack(spacing: 12) {
-            // Balance — large hero card
-            VStack(alignment: .leading, spacing: 6) {
-                Text(String(localized: "balance"))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                Text(CurrencyFormatter.format(viewModel.stats.balance))
-                    .font(.system(size: 34, weight: .bold))
-                    .foregroundStyle(viewModel.stats.balance >= 0 ? .primary : .red)
-                    .contentTransition(.numericText())
+    private var periodPicker: some View {
+        Picker(String(localized: "period"), selection: $viewModel.selectedPeriod) {
+            ForEach(AnalyticsPeriod.allCases) { period in
+                Text(String(localized: String.LocalizationValue(period.localizedKey)))
+                    .tag(period)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
-            .background(.background.secondary)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
+        }
+        .pickerStyle(.segmented)
+    }
 
-            HStack(spacing: 12) {
-                statMiniCard(
-                    title: String(localized: "total_income"),
-                    amount: viewModel.stats.totalIncome,
-                    color: .green,
-                    icon: "arrow.down.circle.fill"
-                )
-                statMiniCard(
-                    title: String(localized: "total_expenses"),
-                    amount: viewModel.stats.totalExpenses,
-                    color: .red,
-                    icon: "arrow.up.circle.fill"
-                )
-            }
+    // MARK: - Summary
+
+    private var summaryCards: some View {
+        HStack(spacing: 12) {
+            miniCard(
+                title: String(localized: "total_income"),
+                amount: viewModel.stats.totalIncome,
+                color: .green,
+                icon: "arrow.down.circle.fill"
+            )
+            miniCard(
+                title: String(localized: "total_expenses"),
+                amount: viewModel.stats.totalExpenses,
+                color: .red,
+                icon: "arrow.up.circle.fill"
+            )
         }
     }
 
-    private func statMiniCard(title: String, amount: Double, color: Color, icon: String) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
+    private func miniCard(title: String, amount: Double, color: Color, icon: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 4) {
                 Image(systemName: icon)
                     .foregroundStyle(color)
@@ -85,7 +84,6 @@ struct DashboardView: View {
             }
             Text(CurrencyFormatter.format(amount))
                 .font(.title3.bold())
-                .foregroundStyle(color)
                 .contentTransition(.numericText())
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -94,47 +92,36 @@ struct DashboardView: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
-    // MARK: - AI Insight Card
-
-    @ViewBuilder
-    private var insightCard: some View {
-        // Static placeholder — real AI integration in Step 4
-        if viewModel.stats.totalExpenses > 0 {
-            InsightCard(
-                title: String(localized: "insight_title"),
-                message: String(localized: "insight_placeholder")
-            )
-        }
-    }
-
     // MARK: - Pie Chart
 
     @ViewBuilder
     private var expenseChart: some View {
         let expenses = viewModel.sortedExpenses
-        if !expenses.isEmpty {
-            VStack(alignment: .leading, spacing: 12) {
-                Text(String(localized: "expenses_by_category"))
-                    .font(.headline)
-
-                Chart(expenses, id: \.category) { item in
-                    SectorMark(
-                        angle: .value("amount", item.amount),
-                        innerRadius: .ratio(0.6),
-                        angularInset: 1.5
-                    )
-                    .foregroundStyle(item.category.color)
-                    .cornerRadius(4)
-                }
-                .frame(height: 220)
-                .chartBackground { _ in
-                    VStack {
-                        Text(String(localized: "total"))
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Text(CurrencyFormatter.format(viewModel.stats.totalExpenses))
-                            .font(.title3.bold())
-                    }
+        if expenses.isEmpty && !viewModel.isLoading {
+            EmptyStateBlock(
+                systemImage: "chart.pie",
+                title: String(localized: "no_transactions"),
+                description: String(localized: "no_transactions_hint")
+            )
+            .frame(height: 200)
+        } else if !expenses.isEmpty {
+            Chart(expenses, id: \.category) { item in
+                SectorMark(
+                    angle: .value("amount", item.amount),
+                    innerRadius: .ratio(0.6),
+                    angularInset: 1.5
+                )
+                .foregroundStyle(item.category.color)
+                .cornerRadius(4)
+            }
+            .frame(height: 220)
+            .chartBackground { _ in
+                VStack {
+                    Text(String(localized: "total"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text(CurrencyFormatter.format(viewModel.stats.totalExpenses))
+                        .font(.title3.bold())
                 }
             }
             .padding()
@@ -143,16 +130,21 @@ struct DashboardView: View {
         }
     }
 
-    // MARK: - Category Breakdown List
+    // MARK: - Category Breakdown
 
     @ViewBuilder
     private var categoryBreakdown: some View {
         let expenses = viewModel.sortedExpenses
         if !expenses.isEmpty {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(String(localized: "expenses_by_category"))
+                    .font(.headline)
+                    .padding(.horizontal, 4)
+                    .padding(.bottom, 4)
+
                 ForEach(expenses, id: \.category) { item in
                     NavigationLink(value: item.category) {
-                        dashboardCategoryRow(
+                        analyticsCategoryRow(
                             category: item.category,
                             amount: item.amount,
                             total: viewModel.stats.totalExpenses
@@ -164,16 +156,10 @@ struct DashboardView: View {
             .padding()
             .background(.background.secondary)
             .clipShape(RoundedRectangle(cornerRadius: 16))
-        } else if !viewModel.isLoading {
-            EmptyStateBlock(
-                systemImage: "tray",
-                title: String(localized: "no_transactions"),
-                description: String(localized: "no_transactions_hint")
-            )
         }
     }
 
-    private func dashboardCategoryRow(
+    private func analyticsCategoryRow(
         category: Category, amount: Double, total: Double
     ) -> some View {
         let pct = total > 0 ? amount / total : 0

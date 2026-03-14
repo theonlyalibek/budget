@@ -29,11 +29,10 @@ struct ContentView: View {
                 )
             }
 
-            Tab(String(localized: "tab_import"), systemImage: "doc.badge.plus") {
-                ImportView(
-                    viewModel: ImportViewModel(
-                        importUseCase: container.importStatementUseCase,
-                        parser: container.kaspiParser
+            Tab(String(localized: "tab_analytics"), systemImage: "chart.bar.fill") {
+                AnalyticsView(
+                    viewModel: AnalyticsViewModel(
+                        getStatsUseCase: container.getDashboardStatsUseCase
                     )
                 )
             }
